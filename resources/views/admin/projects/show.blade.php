@@ -10,6 +10,11 @@
             <h2>Type: {{ $project->type?->name }}</h2>
         </div>
         <p>{{ $project->description }}</p>
+        <ul>
+            @foreach ($project->technologies as $technology)
+            <li>{{$technology->name}}[{{$technology->version}}]</li>
+            @endforeach
+        </ul>
         <div class="d-flex gap-2">
             <a href="{{ route("admin.projects.edit", $project) }}" class="btn btn-primary">Edit</a>
             <form action="{{ route('admin.projects.destroy', $project)}}" method="post">

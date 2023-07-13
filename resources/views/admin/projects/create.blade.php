@@ -35,6 +35,13 @@
                 @endforeach
             </select>
 
+            @foreach ($technologies as $i => $technology)
+                <div class="form-check">
+                    <input type="checkbox" value="{{$technology->id}}" name="technologies[]" id="technologies{{$i}}" class="form-check-input" @checked(is_array(old('technologies')) && in_array($technology->id, old('technologies')))>
+                    <label for="technologies{{$i}}" class="form-check-label">{{$technology->name}}</label>
+                </div>
+            @endforeach
+
             <input type="submit" class="btn btn-primary form-control mb-4" value="Create Project">
         
         </form>
