@@ -45,11 +45,14 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        $imgPath = $data["image"]->store("uploads");
+        $data["image"] = $imgPath;
+
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->save();
 
-        $newProject->technologies()->attach( $data["technologies"] );
+        $newProject->technologies()->attach($data["technologies"]);
 
         return to_route("admin.projects.show", $newProject);
     }

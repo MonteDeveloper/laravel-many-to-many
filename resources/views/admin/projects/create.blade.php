@@ -16,7 +16,7 @@
         </div>
         @endif
 
-        <form action="{{ route("admin.projects.store") }}" method="POST" class="needs-validation">
+        <form action="{{ route("admin.projects.store") }}" method="POST" class="needs-validation" enctype="multipart/form-data">
             @csrf
 
             <label for="name">Name:</label>
@@ -25,8 +25,8 @@
             <label for="description">Description:</label>
             <textarea name="description" id="description" cols="30" rows="10" class="form-control mb-4">{{ old("description") }}</textarea>
 
-            <label for="image">URL Image:</label>
-            <input type="text" name="image" id="image" value="{{ old("image") }}" class="form-control mb-4">
+            <label for="image">Image:</label>
+            <input type="file" name="image" id="image" value="{{ old("image") }}" class="form-control mb-4">
 
             <select class="form-control mb-4" name="type_id" id="type_id">
                 <option value="" selected disabled>Select the TYPE</option>

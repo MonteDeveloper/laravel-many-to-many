@@ -3,13 +3,15 @@
 @section('content')
 
 <div class="container-fluid mt-4">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between gap-2">
         <div class="d-flex align-items-center gap-3">
-            <img class="col-1" src="{{ $project->image }}" alt="{{ $project->title }}" />
-            <h1>{{ $project->name }}</h1>
-            <h2>Type: {{ $project->type?->name }}</h2>
+            <img class="col-1 rounded" src="{{ asset("storage/".$project->image) }}" alt="{{ $project->title }}" />
+            <div>
+                <h1>{{ $project->name }}</h1>
+                <h2>Type: {{ $project->type?->name }}</h2>
+            </div>
         </div>
-        <p>{{ $project->description }}</p>
+        <p class="py-3 m-0">Description: {{ $project->description }}</p>
         <ul>
             @foreach ($project->technologies as $technology)
             <li>{{$technology->name}}[{{$technology->version}}]</li>
