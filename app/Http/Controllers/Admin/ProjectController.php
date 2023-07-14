@@ -46,8 +46,10 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
-        $imgPath = $data["image"]->store("uploads");
-        $data["image"] = $imgPath;
+        if($request->hasFile("image")){
+            $imgPath = $data["image"]->store("uploads");
+            $data["image"] = $imgPath;
+        }
 
         $newProject = new Project();
         $newProject->fill($data);
@@ -93,6 +95,14 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        if($request->hasFile("image")){
+            if($project->image){
+                Storage::delete($project->image);
+            }
+            $imgPath = $data["image"]->store("uploads");
+            $data["image"] = $imgPath;
+        }
+
         $project->update($data);
 
         $project->technologies()->sync($data["technologies"]);
@@ -108,7 +118,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        Storage::delete($project->image);
+        if($project->image){
+            Storage::delete($project->image);
+        }
         $project->delete();
 
         return to_route("admin.projects.index");

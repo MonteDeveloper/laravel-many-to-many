@@ -5,7 +5,7 @@
 <div class="container-fluid mt-4">
     <div class="row justify-content-between gap-2">
         <div class="d-flex align-items-center gap-3">
-            <img class="col-1 rounded" src="{{ asset("storage/".$project->image) }}" alt="{{ $project->title }}" />
+            <img class="col-1 rounded" src="{{ $project->image ? asset("storage/".$project->image) : asset("storage/placeholders/placeholder.png") }}" alt="{{ $project->title }}" />
             <div>
                 <h1>{{ $project->name }}</h1>
                 <h2>Type: {{ $project->type?->name }}</h2>
